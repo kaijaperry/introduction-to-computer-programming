@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Determine Your Age!</title>
+    <link href="Exercise5.1style.css" type="text/css" rel="stylesheet">
+
+    <form>
+    <h1 class="name"> Name: <input type="text" name="name"><br></h1>
+    <h1 class="birthyear"> Birth Year: <input type="text" id="birthday"><br></h1>
+
+    <style>
+         button {
+           font-weight: bold;
+           margin: 2em;
+           padding: 2em;
+           background-color: pink;
+           color: purple;
+         }
+
+         h1 {
+           font-size: 1.5em;
+           font-weight: bold;
+
+           span#age_of_user {
+             font-style: italic;
+             font-weight: bold;
+         }
+    </style>
+    </form>
+  </head>
+
+  <body>
+      <h1 class="description">Calculate your age!</h1>
+
+      <button id="click_here">Click Here!</button>
+
+<h2 class="declaration"> <div>You are <span id="age_of_user">0</span> years old.</div> </h2>
+
+     <script language="javascript">
+        let  button          = document.getElementById('click_here');
+
+      function determine_birthday(e) {
+        let user_input = document.getElementById('birthday')
+        let age_number = document.getElementById('age_of_user');
+        let age_of_user = (2018 - user_input.value);
+        age_number.innerHTML = age_of_user;
+        console.log(age_of_user);
+      }
+
+      button.addEventListener('click', determine_birthday);
+
+
+
+    </script>
+  </body>
+</html>

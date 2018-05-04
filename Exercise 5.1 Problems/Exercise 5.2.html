@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Delete an image</title>
+  <link href="Exercise5.2style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="media">
+    <h1>Click on an image to delete it from the page.</h1>
+    <img src="Baby-Donkey-Parent-Donkey.jpg.638x0_q80_crop-smart.jpg" onClick="delete_picture(this)"></img><br />
+    <img src="donkey-68.jpg" onClick="delete_picture(this)"></img><br />
+    <img src="cute-miniature-baby-donkeys-15-5aaa277ac4000__605.jpg" onClick="delete_picture(this)"></img><br />
+    <img src="Donkey.png" onClick="delete_picture(this)"></img>
+    <!-- <img src="donkeys.jpg"></img><br /> -->
+  </div>
+</body>
+
+<script language="javascript">
+
+function delete_picture(node) {
+  node.parentNode.removeChild(node);
+}
+
+
+</script>
