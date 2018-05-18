@@ -1,0 +1,30 @@
+body {
+  background-color: #AAAAAA;
+}
+
+h1 {
+  font-size: 70px;
+  color: #FFF;
+}
+
+table {
+  background-color: #FFF;
+  border-collapse: collapse;
+}
+
+table th {
+  text-align: left;
+  background-color: #85144b;
+  color: #FFF;
+  padding: 8px 100px 8px 16px;
+}
+
+table td {
+  border: 1px solid #e3e3e3;
+  padding: 4px 8px;
+}
+
+table tr:hover {
+    background-color: #39CCCC;
+    color: #FFF;
+}
