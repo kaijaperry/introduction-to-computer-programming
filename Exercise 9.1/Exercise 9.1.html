@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Exercise 9.1</title>
+    </head>
+    <body>
+        <div id="main">
+            Information to be displayed
+        </div>
+     </body>
+
+     <script src="http://api.musixmatch.com/ws/1.1/artist.search?jsoncallback=artistResults&apikey=YourAPI&q_artist=Chang&format=json">
+     </script>
+
+     <script>
+      function artistResults(json){
+       //
+       // var myDiv = document.getElementById("main");
+       //
+       // myDiv.innerHTML = "<img src= '" + json.items[2].media.m + "' />" ;
+
+        console.log(json);
+        debugger;
+      }
+
+      </script>
+
+
+
+<!--
+	54119b108caa6f5025d7ed6530da0870	 -->
+</html>
