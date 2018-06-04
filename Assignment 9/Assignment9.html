@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Assignment 9</title>
+    </head>
+    <body>
+        <h1 id="main">
+            Top 50 Artists on Last.fm
+        </h1>
+
+        <ul id="artist-list"/>
+     </body>
+
+     <script>
+      function topArtistsCallback(json){
+
+        console.log(json);
+        const artists = json.artists.artist;
+
+        for (let i = 0; i < artists.length; ++i) {
+          let artist_item = document.createElement('li');
+          let artist_list = document.getElementById("artist-list");
+          artist_list.appendChild(artist_item);
+
+          let artist_name = document.createElement("h3");
+          artist_name.innerHTML = artists[i].name;
+          artist_item.appendChild(artist_name);
+
+          let artist_play_count = document.createElement("div");
+          artist_play_count.innerHTML = "Number of plays on Last.fm: " + artists[i].playcount;
+          artist_play_count.className = "playcount";
+          artist_play_count.style = "color:blue;";
+          artist_item.appendChild(artist_play_count);
+
+          let artist_listener_count = document.createElement("div");
+          artist_listener_count.innerHTML = "Number of listeners on Last.fm: " + artists[i].listeners;
+          artist_item.appendChild(artist_listener_count);
+
+          let artist_image = document.createElement("img");
+          artist_image.src = artists[i].image[2]["#text"];
+          artist_item.appendChild(artist_image);
+
+          let empty_line = document.createElement("p");
+          artist_item.appendChild(empty_line);
+        }
+
+      }
+
+      </script>
+
+      <script src="http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=YOUR_API_KEY&format=json&callback=topArtistsCallback">
+      </script>
+
+
+
+</html>
