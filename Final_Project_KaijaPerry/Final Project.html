@@ -19,32 +19,45 @@ display:inline-block;
    width: 100%;
 }
 
+.button-container {
+  display: flex;
+}
 
 .dropbtn {
     background-color: #9961CB;
     color: white;
     padding: 16px;
     font-size: 16px;
+    line-height: 16px;
+    width: 100%;
     border: none;
 }
 
 .dropdown {
+    width: 25%;
     position: relative;
     display: inline-block;
+    margin: 10px;
+}
+
+.dropdown.result {
+    width: 50%;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 130px;
+    width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    max-height: 380px;
+    overflow: auto;
 }
 
 .dropdown-content a {
     color: black;
-    padding: 2px 4px;
+    padding: 10px 12px;
     text-decoration: none;
     display: block;
 }
@@ -64,101 +77,109 @@ display:inline-block;
     height:auto;
     display:inline-block;
 }
-
-.dropbtn2 {
-    background-color: #9961CB;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-}
-
-.dropdown2 {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content2 {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content2 a {
-    color: black;
-    padding: 10px 12px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content2 a:hover {background-color: #ddd}
-
-.dropdown2:hover .dropdown-content2 {
-    display: block;
-}
-
-.dropdown2:hover .dropbtn2 {
-    background-color: #3e8e41;
-}
 </style>
 </head>
 <body>
 
 <h2>Seventh Chords Calculator</h2>
 
-<div class="dropdown">
-  <button class="dropbtn">Select a note:</button>
-  <div class="dropdown-content">
-    <a href="#">C</a>
-    <a href="#">C♯</a>
-    <a href="#">D♭</a>
-    <a href="#">D</a>
-    <a href="#">D♯</a>
-    <a href="#">E♭</a>
-    <a href="#">E</a>
-    <a href="#">E♯</a>
-    <a href="#">F♭</a>
-    <a href="#">F</a>
-    <a href="#">F♯</a>
-    <a href="#">G♭</a>
-    <a href="#">G</a>
-    <a href="#">G♯</a>
-    <a href="#">A♭</a>
-    <a href="#">A</a>
-    <a href="#">A♯</a>
-    <a href="#">B♭</a>
-    <a href="#">B</a>
-    <a href="#">B♯</a>
-    <a href="#">C♭</a>
-  </br>
-  </div>
-  <div class="divider"/>
-</div>
-  <div class="dropdown2">
-
-    <button class="dropbtn">Select a chord type:</button>
-    <div class="dropdown-content2">
-      <a href="#">7</a>
-      <a href="#">Maj7</a>
-      <a href="#">min7</a>
-      <a href="#">ø7</a>
-      <a href="#">°7</a>
-      <a href="#">aug7</a>
-      <a href="#">+Maj7</a>
-      <a href="#">min(Maj7)</a>
-      <a href="#">7sus4</a>
-      <a href="#">7sus2</a>
-
+<div class="button-container">
+  <div class="dropdown note">
+    <button id='noteButton' class="dropbtn">Select a root:</button>
+    <div class="dropdown-content">
+      <a href="#" onclick="onNoteClick(this)">C</a>
+      <a href="#" onclick="onNoteClick(this)">C♯</a>
+      <a href="#" onclick="onNoteClick(this)">D♭</a>
+      <a href="#" onclick="onNoteClick(this)">D</a>
+      <a href="#" onclick="onNoteClick(this)">D♯</a>
+      <a href="#" onclick="onNoteClick(this)">E♭</a>
+      <a href="#" onclick="onNoteClick(this)">E</a>
+      <a href="#" onclick="onNoteClick(this)">E♯</a>
+      <a href="#" onclick="onNoteClick(this)">F♭</a>
+      <a href="#" onclick="onNoteClick(this)">F</a>
+      <a href="#" onclick="onNoteClick(this)">F♯</a>
+      <a href="#" onclick="onNoteClick(this)">G♭</a>
+      <a href="#" onclick="onNoteClick(this)">G</a>
+      <a href="#" onclick="onNoteClick(this)">G♯</a>
+      <a href="#" onclick="onNoteClick(this)">A♭</a>
+      <a href="#" onclick="onNoteClick(this)">A</a>
+      <a href="#" onclick="onNoteClick(this)">A♯</a>
+      <a href="#" onclick="onNoteClick(this)">B♭</a>
+      <a href="#" onclick="onNoteClick(this)">B</a>
+      <a href="#" onclick="onNoteClick(this)">B♯</a>
+      <a href="#" onclick="onNoteClick(this)">C♭</a>
     </div>
   </div>
+  <div class="dropdown chord">
+    <button id="chordTypeButton" class="dropbtn">Select a chord type:</button>
+    <div class="dropdown-content">
+      <a href="#" onclick="onChordClick(this)">7</a>
+      <a href="#" onclick="onChordClick(this)">Maj7</a>
+      <a href="#" onclick="onChordClick(this)">min7</a>
+      <a href="#" onclick="onChordClick(this)">ø7</a>
+      <a href="#" onclick="onChordClick(this)">°7</a>
+      <a href="#" onclick="onChordClick(this)">aug7</a>
+      <a href="#" onclick="onChordClick(this)">+Maj7</a>
+      <a href="#" onclick="onChordClick(this)">min(Maj7)</a>
+      <a href="#" onclick="onChordClick(this)">7sus4</a>
+      <a href="#" onclick="onChordClick(this)">7sus2</a>
+    </div>
+  </div>
+  <button class="dropdown dropbtn result">
+    Notes: <span id="result"/>
+  </div>
+</div>
+
+
 </body>
 <style>
 body {
     background-color: #DDE7F3;
 }
 </style>
+
+<script>
+
+  var chordTable = {
+    'A': {
+      '7': "A, C#, E, G",
+      'Maj7':'A, C#, E, G#',
+    },
+    'B♭': {
+      '7': "A, C#, E, G",
+      'maj7':'A, C#, E, G#'
+    }
+  }
+
+
+
+  var chordRoot = "";
+  var chordType = "";
+
+  function onNoteClick(element) {
+    chordRoot = element.text;
+    const button = document.getElementById('noteButton');
+    button.innerHTML = "Root: " + chordRoot;
+    updateResult();
+  }
+  function onChordClick(element) {
+    chordType = element.text;
+    const button = document.getElementById('chordTypeButton');
+    button.innerHTML = "Chord Type: " + chordType;
+    updateResult();
+  }
+
+  function updateResult() {
+    if (chordRoot && chordType) {
+      console.log("Show result for " + chordRoot + chordType);
+      const resultSpan = document.getElementById('result');
+      resultSpan.innerHTML = chordTable[chordRoot][chordType];
+    }
+  }
+
+
+
+
+</script>
 
 </html>
