@@ -106,7 +106,6 @@ display:inline-block;
       <a href="#" onclick="onNoteClick(this)">A♯</a>
       <a href="#" onclick="onNoteClick(this)">B♭</a>
       <a href="#" onclick="onNoteClick(this)">B</a>
-      <a href="#" onclick="onNoteClick(this)">B♯</a>
       <a href="#" onclick="onNoteClick(this)">C♭</a>
     </div>
   </div>
@@ -141,21 +140,11 @@ body {
 <script>
 
   var chordTable = {
-    'A': {
-      '7': "A, C♯, E, G",
-      'Maj7':'A, C♯, E, G♯',
-      'min7': 'A, C, E, G',
-    },
-    'B♭': {
-      '7': "A, C♯, E, G",
-      'Maj7':'A, C♯, E, G♯'
-
-    },
 
     'C': {
       '7': "C, E, G, B♭",
       'Maj7':'C, E, G, B',
-      'min7': 'C, E♭, G, B',
+      'min7': 'C, E♭, G, B♭',
       'ø7': 'C, E♭, G♭, B♭',
       '°7': 'C, E♭, G♭, A',
       'aug7': 'C, E, G♯, B♭',
@@ -164,10 +153,11 @@ body {
       '7sus4' : 'C, F, G, B♭',
       '7sus2' : 'C, D, G, B♭',
     },
+
   'C♯': {
     '7': "C♯, E♯, G♯, B",
     'Maj7':'C♯, E♯, G♯, C',
-    'min7': 'C♯, E, G♯, C',
+    'min7': 'C♯, E, G♯, B',
     'ø7': 'C♯, E, G, B♭',
     '°7': 'C♯, E, G, B',
     'aug7': 'C♯, E♯, G♯♯, B',
@@ -180,7 +170,7 @@ body {
   'D♭': {
     '7': "D♭, F, A♭, B",
     'Maj7':'D♭, F, A♭, C',
-    'min7': 'D♭, E, A♭, C',
+    'min7': 'D♭, E, A♭, B',
     'ø7': 'D♭, E, G, B',
     '°7': 'D♭, E, G, B♭',
     'aug7': 'D♭, F, A, C♭',
@@ -193,7 +183,7 @@ body {
   'D': {
     '7': "D, F♯, A, C",
     'Maj7':'D, F♯, A, C♯',
-    'min7': 'D, F, A, C♯',
+    'min7': 'D, F, A, C',
     'ø7': 'D, F, A♭, C',
     '°7': 'D, F, A♭, B',
     'aug7': 'D, F♯, A♯, C',
@@ -206,7 +196,7 @@ body {
   'D♯': {
     '7': "D♯, G, A♯, C♯",
     'Maj7':'D♯, G, A♯, D',
-    'min7': 'D♯, F♯, A♯, D',
+    'min7': 'D♯, F♯, A♯, C♯',
     'ø7': 'D♯, F♯, A, C♯',
     '°7': 'D♯, F♯, A, C',
     'aug7': 'D♯, G, B, C♯',
@@ -219,7 +209,7 @@ body {
   'E♭': {
     '7': "E♭, G, B♭, D♭",
     'Maj7':'E♭, G, B♭, D',
-    'min7': 'E♭, G♭, B♭, D',
+    'min7': 'E♭, G♭, B♭, D♭',
     'ø7': 'E♭, G♭, A, D♭',
     '°7': 'E♭, G♭, A, C',
     'aug7': 'E♭, G, B, D♭',
@@ -232,7 +222,7 @@ body {
   'E': {
     '7': "E, G♯, B, D",
     'Maj7':'E, G♯, B, D♯',
-    'min7': 'E, G, B, D♯',
+    'min7': 'E, G, B, D',
     'ø7': 'E, G, A♯, D',
     '°7': 'E, G, A♯, C♯',
     'aug7': 'E, G♯, C, D',
@@ -245,7 +235,7 @@ body {
   'E♯': {
     '7': "E♯, A, C, D♯",
     'Maj7':'E♯, A, C, E',
-    'min7': 'E♯, G♯, C, E',
+    'min7': 'E♯, G♯, C, D♯',
     'ø7': 'E♯, G♯, B, D♯',
     '°7': 'E♯, G♯, B, D',
     'aug7': 'E♯, A, C♯, D♯',
@@ -269,9 +259,9 @@ body {
   },
 
   'F♯': {
-    '7': "F♯, A♯, D, E",
-    'Maj7':'F♯, A♯, D, F',
-    'min7': 'F♯, A, D, F',
+    '7': "F♯, A♯, C♯, E",
+    'Maj7':'F♯, A♯, C♯, F',
+    'min7': 'F♯, A, C♯, E',
     'ø7': 'F♯, A, C♯, E',
     '°7': 'F♯, A, C♯, D♯',
     'aug7': 'F♯, A♯, D♯, E',
@@ -279,6 +269,123 @@ body {
     'min(Maj7)': 'F♯, A♯, C♯, F',
     '7sus4' : 'F♯, C, C♯, E',
     '7sus2' : 'F♯, A, C♯, E',
+  },
+
+  'G♭': {
+    '7': "G♭, B♭, D, E",
+    'Maj7':'G♭, B♭, D♭, F',
+    'min7': 'G♭, A, D♭, F♭',
+    'ø7': 'G♭, A, D♭, E',
+    '°7': 'G♭, A, D♭, E♭',
+    'aug7': 'G♭, B♭, E♭, E',
+    '+Maj7': 'G♭, B♭, E♭, F',
+    'min(Maj7)': 'G♭, B♭, D♭, F',
+    '7sus4' : 'G♭, C, D♭, E',
+    '7sus2' : 'G♭, A, D♭, E',
+  },
+
+  'G': {
+    '7': "G, B, D, E",
+    'Maj7':'G, B, D, F♯',
+    'min7': 'G, B♭, D, F',
+    'ø7': 'G, B♭, C♯, F',
+    '°7': 'G, B♭, C♯, E',
+    'aug7': 'G, B, D♯, F',
+    '+Maj7': 'G, B, D♯, F♯',
+    'min(Maj7)': 'G, B, C♯, F♯',
+    '7sus4' : 'G, D♯, C♯, F',
+    '7sus2' : 'G, B, C♯, F',
+  },
+
+  'G♯': {
+    '7': "G♯, C, D♯, F",
+    'Maj7':'G♯, C, D♯, G',
+    'min7': 'G♯, B, D♯, F♯',
+    'ø7': 'G♯, B, D, F♯',
+    '°7': 'G♯, B, D, F',
+    'aug7': 'G♯, C, E, F♯',
+    '+Maj7': 'G♯, C, E, G',
+    'min(Maj7)': 'G♯, C, D, G',
+    '7sus4' : 'G♯, E, D, F♯',
+    '7sus2' : 'G♯, C, D, F♯',
+  },
+
+  'A♭': {
+    '7': "A♭, C, E♭, F",
+    'Maj7':'A♭, C, E♭, G',
+    'min7': 'A♭, B, E♭, G♭',
+    'ø7': 'A♭, B, D, G♭',
+    '°7': 'A♭, B, D, F',
+    'aug7': 'A♭, C, E, G♭',
+    '+Maj7': 'A♭, C, E, G',
+    'min(Maj7)': 'A♭, C, D, G',
+    '7sus4' : 'A♭, E, D, G♭',
+    '7sus2' : 'A♭, C, D, G♭',
+  },
+
+  'A': {
+    '7': "A, C♯, E, F♯",
+    'Maj7':'A, C♯, E, G♯',
+    'min7': 'A, C, E, G',
+    'ø7': 'A, C, D♯, G',
+    '°7': 'A, C, D♯, F♯',
+    'aug7': 'A, C♯, F, G',
+    '+Maj7': 'A, C♯, F, G♯',
+    'min(Maj7)': 'A, C♯, D♯, G♯',
+    '7sus4' : 'A, F, D♯, G',
+    '7sus2' : 'A, C♯, D♯, G',
+  },
+
+  'A♯': {
+    '7': "A♯, D, F, G",
+    'Maj7':'A♯, D, F, A',
+    'min7': 'A♯, C♯, F♯, G♯',
+    'ø7': 'A♯, C♯, E, G♯',
+    '°7': 'A♯, C♯, E, G',
+    'aug7': 'A♯, D, F♯, G♯',
+    '+Maj7': 'A♯, D, F♯, A',
+    'min(Maj7)': 'A♯, D, E, A',
+    '7sus4' : 'A♯, F♯, E, G♯',
+    '7sus2' : 'A♯, D, E, G♯',
+  },
+
+  'B♭': {
+    '7': "B♭, D, F, G",
+    'Maj7':'B♭, D, F, A',
+    'min7': 'B♭, D♭, G♭, A♭',
+    'ø7': 'B♭, D♭, E, A♭',
+    '°7': 'B♭, D♭, E, G',
+    'aug7': 'B♭, D, G♭, A♭',
+    '+Maj7': 'B♭, D, G♭, A',
+    'min(Maj7)': 'B♭, D, E, A',
+    '7sus4' : 'B♭, G♭, E, A♭',
+    '7sus2' : 'B♭, D, E, A♭',
+  },
+
+  'B': {
+    '7': "B, D♯, F♯, G♯",
+    'Maj7':'B, D♯, F♯, A♯',
+    'min7': 'B, D, G, A',
+    'ø7': 'B, D, F, A',
+    '°7': 'B, D, F, G♯',
+    'aug7': 'B, D♯, G, A',
+    '+Maj7': 'B, D♯, G, A♯',
+    'min(Maj7)': 'B, D♯, F, A♯',
+    '7sus4' : 'B, G, F, A',
+    '7sus2' : 'B, D♯, F, A',
+  },
+
+  'C♭': {
+    '7': "C♭, E, G, A",
+    'Maj7':'C♭, E, G, B',
+    'min7': 'C♭, E♭, A♭, B♭',
+    'ø7': 'C♭, E♭, G♭, B♭',
+    '°7': 'C♭, E♭, G♭, A',
+    'aug7': 'C♭, E, A♭, B♭',
+    '+Maj7': 'C♭, E, A♭, B',
+    'min(Maj7)': 'C♭, E, G♭, B',
+    '7sus4' : 'C♭, A♭, G♭, B♭',
+    '7sus2' : 'C♭, E, G♭, B♭',
   },
 
   }
