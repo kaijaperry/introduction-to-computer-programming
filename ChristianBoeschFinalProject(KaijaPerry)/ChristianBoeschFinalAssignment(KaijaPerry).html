@@ -1,0 +1,276 @@
+<html>
+<head>
+  <title>Lyric Learner</title>
+</head>
+<body>
+
+  <style>
+  body {
+    background-color: #e6ffff;
+    font-family:sans-serif;
+  }
+
+  .instructions {
+    font-weight: bold;
+  }
+
+  .button {
+    font-family: sans-serif;
+    color: white;
+    background: #7fcad0;
+    padding: 10px;
+    display: inline-block;
+    margin: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2px;
+    cursor: hand;
+    font-size: 15px;
+  }
+
+  .button:hover {
+    background: #008080;
+  }
+
+  .song-info {
+    font-family: sans-serif;
+    color: white;
+    background: #00b3b3;
+    padding: 10px;
+    display: inline-block;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 2px;
+  }
+
+  #game {
+    display: none;
+  }
+
+  #lyrics {
+    height: 100px;
+    width: 300px;
+    font-size: 13px;
+  }
+
+  #songTitle {
+    font-size: 14px;
+    height: 38px;
+  }
+
+  </style>
+
+
+  <h1>Lyric Learner</h1>
+
+  <div>
+    Enter the title of the song that you want to memorize lyrics for, or just go google for the lyrics. <br />
+
+    <input id="songTitle" type="text"></input>
+    <button class='button' onclick="search()">Search</button>
+
+  </div>
+
+  <div>
+    <br />
+    <span class='song-info' id="track0">Loading</span>
+    <a id='track0 button' class='button'>Autofill lyrics</a>
+    <a id='track0 externalLink' class='button'>Full lyrics</a>
+
+  </div>
+  <div>
+    <span class='song-info' id="track1">Loading</span>
+    <a id='track1 button' class='button'>Autofill lyrics</a>
+    <a id='track1 externalLink' class='button'>Full lyrics</a>
+  </div>
+
+  <div>
+    <span class='song-info' id="track2">Loading</span>
+    <a id='track2 button' class='button'>Autofill lyrics</a>
+    <a id='track2 externalLink' class='button'>Full lyrics</a>
+  </div>
+  <br />
+  Click on the lyrics link for the song you are looking for.<br />
+  Copy the lyrics from the page that opens and paste them into this box.
+  <br />
+  <textarea id="lyrics" name="Text1" cols="40" rows="20"></textarea>
+  <br />
+  <br>
+  Select level:
+  <select>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>.
+  <br>
+  <br>
+  On level 1 you enter every 5th word and on level 5 you enter them all.<br />
+  Press start to begin memorizing lyrics.
+  <button class='button' onClick="showGame()">Start</button><br />
+
+  <div id='game'>
+    <hr />
+    <span class='instructions'> Click in each box and type the first letter of the missing word. </span>
+    <div id="gameDiv">
+    </div>
+  </div>
+
+</body>
+
+<script>
+function search() {
+  var songTitle = document.getElementById("songTitle").value;
+  var s = document.createElement("script");
+  s.src = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=artistResults&q_track="+songTitle+"&quorum_factor=1&apikey=c6c38fd153529bce6470894babe15786";
+  document.body.appendChild(s);
+}
+document.getElementById("songTitle").value = "City of Stars";
+search();
+difficultyLevel = 5;
+currentWords = []
+function splitSong(song) {
+  let result = [];
+  let lines = song.split("\n");
+  for (let line of lines) {
+    let words = line.split(" ");
+    result.push(words);
+  }
+  //console.log(result);
+  currentWords = result;
+  return result;
+}
+function getGrid(songArray, level) {
+  let canView = [];
+  for (let row in songArray) {
+    let newRow = [];
+    for (let col in songArray[row]) {
+      //newRow.push(songArray[row][col])
+      // Get a random nuumber between 1 and 10.
+      let randomValue = Math.floor(Math.random() * difficultyLevel + 1);
+      if (songArray[row][col] === "") {
+        newRow.push(1);
+      } else if (level < randomValue) {
+        newRow.push(1);
+      } else {
+        newRow.push(0);
+      }
+      //console.log(songArray[row][col]);
+    }
+    canView.push(newRow);
+  }
+  return canView;
+}
+function processClick(row,col){
+  console.log("row",row,'col',col);
+  let id = 'input'+row+'_'+col
+  let value = document.getElementById(id).value;
+
+  if(value[0].toLowerCase()  === currentWords[row][col][0].toLowerCase() ){
+    console.log("Match");
+    let node = document.getElementById('span'+row+'_'+col)
+    node.innerHTML = '<span>'+currentWords[row][col]+ '  </span>';
+
+  } else {
+    console.log("Wrong",value[0], currentWords[row][col][0]);
+  }
+  //console.log(currentWords);
+
+}
+function showGame(){
+  document.getElementById("game").style.display = 'block';
+  document.getElementById("gameDiv").innerHTML = "";
+  //Add all the words from the song.
+  let lyrics = document.getElementById("lyrics").value
+  //let lyrics = "This is\na test";
+  let songArray = splitSong(lyrics);
+  let grid = getGrid(songArray,1);
+  console.log(grid);
+  for (let row in songArray){
+    // Add a new line for each row.
+    let node = document.createElement("span");
+    node.innerHTML = '<br/>';
+    document.getElementById("gameDiv").appendChild(node);
+
+    for (let col in songArray[row]){
+      console.log(songArray[row][col])
+      //document.getElementById("parentID").appendChild(
+      let node = document.createElement("span");
+      node.setAttribute("id", 'span'+row+'_'+col);
+
+      if(grid[row][col] < 1){
+        node.innerHTML = '<input onkeyup="processClick('+row+','+col+')" id="input'+row+'_'+col+'"></input> ';
+      } else {
+        node.innerHTML = '<span>'+songArray[row][col]+ '  </span>';
+      }
+      document.getElementById("gameDiv").appendChild(node);
+    }
+
+  }
+
+}
+function artistResults(json){
+  var myPre = document.getElementById("Pre");
+
+  function getPropertyForTrack(trackNumber, propertyName) {
+    return json["message"]["body"]["track_list"][trackNumber]["track"][propertyName];
+  }
+
+  var track0 = getPropertyForTrack(0, 'track_name');
+  var artist0 = getPropertyForTrack(0, 'artist_name');
+  var album0 = getPropertyForTrack(0, 'album_name');
+  var trackID0 = getPropertyForTrack(0, 'track_id');
+  var trackURL0 = getPropertyForTrack(0, 'track_share_url');
+
+  var track1 = getPropertyForTrack(1, 'track_name');
+  var artist1 = getPropertyForTrack(1, 'artist_name');
+  var album1 = getPropertyForTrack(1, 'album_name');
+  var trackID1 = getPropertyForTrack(1, 'track_id');
+  var trackURL1 = getPropertyForTrack(1, 'track_share_url');
+
+  var track2 = getPropertyForTrack(2, 'track_name');
+  var artist2 = getPropertyForTrack(2, 'artist_name');
+  var album2 = getPropertyForTrack(2, 'album_name');
+  var trackID2 = getPropertyForTrack(2, 'track_id');
+  var trackURL2 = getPropertyForTrack(2, 'track_share_url');
+
+  const track0Element = document.getElementById("track0");
+  track0Element.innerHTML = track0 + ' by ' + artist0 + ' from album ' + album0;
+  const track0Link = document.getElementById('track0 button');
+  track0Link.onclick = (x) => lookupLyrics(x, trackID0);
+
+  document.getElementById('track0 externalLink').href = trackURL0;
+  // track0Link.onclick = 'window.location.href = "' + trackURL0 + '"';
+
+  const track1Element = document.getElementById("track1");
+  track1Element.innerHTML = track1 + ' by ' + artist1 + ' from album ' + album1;
+  const track1Link = document.getElementById('track1 button');
+  track1Link.onclick = (x) => lookupLyrics(x, trackID1);
+
+  document.getElementById('track1 externalLink').href = trackURL1;
+
+  const track2Element = document.getElementById("track2");
+  track2Element.innerHTML = track2 + ' by ' + artist2 + ' from album ' + album2;
+  const track2Link = document.getElementById('track2 button');
+  track2Link.onclick = (x) => lookupLyrics(x, trackID2);
+
+  document.getElementById('track2 externalLink').href = trackURL2;
+
+}
+
+function showLyrics (json) {
+  document.getElementById('lyrics').value = json.message.body.lyrics.lyrics_body;
+}
+
+function lookupLyrics(button, trackID) {
+  var s = document.createElement("script");
+  s.src = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=showLyrics&track_id="+trackID+"&apikey=c6c38fd153529bce6470894babe15786";
+  document.body.appendChild(s);
+}
+
+
+</script>
+
+</html>
