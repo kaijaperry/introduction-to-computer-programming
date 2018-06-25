@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Exercise 9.1</title>
+    </head>
+    <body>
+        <div id="main">
+          List of artists
+        </div>
+        <ol id='list'/>
+     </body>
+
+     <script>
+     function artistResults(json){
+       var myDiv = document.getElementById("main");
+
+       const artists = json.message.body.artist_list;
+       for (let i = 0; i < artists.length; ++i) {
+         const artist = artists[i].artist;
+         console.log(artist.artist_name);
+         const artistItem = document.createElement('li');
+         artistItem.innerHTML = artist.artist_name;
+         myDiv.appendChild(artistItem);
+       }
+
+       console.log(json);
+       // debugger;
+     }
+
+     </script>
+
+     <script src="http://api.musixmatch.com/ws/1.1/artist.search?callback=artistResults&q_artist=Chang&format=jsonp&apikey=YourAPIKey">
+     </script>
+
+
+</html>
